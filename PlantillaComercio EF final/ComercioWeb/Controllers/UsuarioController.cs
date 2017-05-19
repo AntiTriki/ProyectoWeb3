@@ -1,17 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using AccesoDatos.Domain.Services;
 
-namespace ComercioWeb.Controllers
+namespace PlantillaComercio.Controllers
 {
     public class UsuarioController : Controller
     {
-        // GET: Usuario
-        public ActionResult Index()
+        readonly UsuarioServicio _usarioServicio = new UsuarioServicio();
+        public ActionResult Usuario()
         {
+            ViewBag.Message = "Usuario";
+
             return View();
+        }
+
+        public JsonResult ObtenerUsuarios()
+        {
+            try
+            {
+                var result = _usarioServicio.ObtenerUsuariosAbm();
+                var data = new { sucess = true, listas = result };
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                var data = new { sucess = false, mensaje = ex.Message };
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }
