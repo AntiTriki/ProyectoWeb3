@@ -19,4 +19,9 @@ namespace AccesoDatos.Domain.Entities
         public string telefono;
         public int valido;
     }
+    public class EmpresaAbmDTO
+    {
+        public List<Empresa> Empresas;
+        public List<Categoria> Categorias;
+    }
 }
